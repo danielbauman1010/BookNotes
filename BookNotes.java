@@ -93,8 +93,13 @@ public class BookNotes {
         //hopefully java 9 would make this look alittle bit better
         
         characters.forEach(System.out::print);
-        
-        
+        //Quiz 5.2
+        //list of numbers to list of squares of each number
+        System.out.println("");
+        List<Integer> squareOfLengths = lengths.stream().map(n -> n*n).collect(toList());
+        System.out.println(lengths.toString());
+        System.out.println(squareOfLengths.toString());
+        System.out.println("");
     }
     
 }
