@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import java.util.function.IntPredicate;
@@ -109,7 +110,14 @@ public class BookNotes {
             System.out.print(" [ "+p[0]+" , "+p[1]+" ] ");
         });
         System.out.println("");
+        //optionals and findany/findfirst
+        Optional<int []> divBy3 = pairs.stream().filter(x -> (x[0]+x[1]) %3 == 0).findAny();
+        divBy3.ifPresent(num -> {
+            System.out.println(" [ "+num[0]+" , "+num[1]+" ] "+" -> "+num[0]+"+"+num[1]+"="+(num[0]+num[1])+" -> %3 = 0");
+        });
         
+        int big10 = numbers1.stream().filter(n -> n >= 10).findAny().orElse(0);
+        System.out.println(big10);
     }
     
 }
