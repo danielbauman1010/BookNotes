@@ -13,6 +13,7 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -125,8 +126,22 @@ public class BookNotes {
         min.ifPresent(System.out::println); //minimum value
         Optional max = numbers1.stream().reduce(Integer::max);
         max.ifPresent(System.out::println); //maximum value - done pretty easily
-        
-        
+        Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(1, 100).boxed().flatMap(a ->IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a*a + b*b) % 1 == 0).mapToObj(b ->new int[]{a, b, (int)Math.sqrt(a * a + b * b)}));
+        // Java.version(8).lines = VERY LONG;
+        System.out.println("Pythagorien triples: (limit 5)");
+        pythagoreanTriples.limit(5).forEach(t -> {
+            System.out.println(t[0] + ", " + t[1] + ", " + t[2]);            
+        });   //magic (:0
+        System.out.println("Boxes with volume smaller than a hundred: (limit 5)");
+        Stream<int[]> boxesWithVolumeSmallerThanAhundred = IntStream.rangeClosed(1, 100).boxed().flatMap(l ->IntStream.rangeClosed(l, 100).boxed().flatMap(h ->IntStream.rangeClosed(l, 100).filter(w -> l*h*w <= 100).mapToObj(w -> new int[]{l,h,w,(l*h*w)})));
+        boxesWithVolumeSmallerThanAhundred.limit(5).forEach(b -> {
+            System.out.println(b[0]+", "+b[1]+", "+b[2]+","+b[3]);
+        }); 
+        System.out.println("Cubes with volume smaller than a hundred:");
+        Stream<int[]> cubesWithVolumeSmallerThanAhundred = IntStream.rangeClosed(1, 100).boxed().filter(l -> l*l*l <= 100).map(l -> new int[]{l,l,l,(l*l*l)});
+        cubesWithVolumeSmallerThanAhundred.forEach(c -> {
+            System.out.println(c[0]+", "+c[1]+", "+c[2]+","+c[3]);
+        }); //apernatly there are only four cubes with volumes smaller than a hundred
     }
     
 }
