@@ -112,12 +112,21 @@ public class BookNotes {
         System.out.println("");
         //optionals and findany/findfirst
         Optional<int []> divBy3 = pairs.stream().filter(x -> (x[0]+x[1]) %3 == 0).findAny();
+        //find a pair that it's sum could be devided by 3
         divBy3.ifPresent(num -> {
             System.out.println(" [ "+num[0]+" , "+num[1]+" ] "+" -> "+num[0]+"+"+num[1]+"="+(num[0]+num[1])+" -> %3 = 0");
-        });
+        }); 
         
-        int big10 = numbers1.stream().filter(n -> n >= 10).findAny().orElse(0);
+        int big10 = numbers1.stream().filter(n -> n >= 10).findAny().orElse(0); //are you bigger than 10?
         System.out.println(big10);
+        Optional sum = numbers1.stream().reduce(Integer::sum); //efficientcy in it's finest
+        sum.ifPresent(System.out::println); //sum of all numbers
+        Optional min = numbers1.stream().reduce(Integer::min);
+        min.ifPresent(System.out::println); //minimum value
+        Optional max = numbers1.stream().reduce(Integer::max);
+        max.ifPresent(System.out::println); //maximum value - done pretty easily
+        
+        
     }
     
 }
