@@ -13,6 +13,7 @@ import java.util.function.BiConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.summarizingInt;
 import static java.util.stream.Collectors.summingInt;
@@ -179,7 +180,11 @@ public class BookNotes {
         System.out.println("Summarize statistic of pythagorean triples c value");
         IntSummaryStatistics cValueStatistics = pythagoreanTriples.collect(summarizingInt(t -> t[2]));
         System.out.println(cValueStatistics);
-        
+        System.out.println("");
+        // using joining to join strings together
+        System.out.println("all of the names:");
+        String allNames = names.stream().collect(joining(", "));
+        System.out.println(allNames);
     }
     
 }
