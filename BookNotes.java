@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.maxBy;
+import static java.util.stream.Collectors.summarizingInt;
 import static java.util.stream.Collectors.summingInt;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
@@ -136,9 +138,10 @@ public class BookNotes {
                         .mapToObj(b ->new int[]{a, b, (int)Math.sqrt(a * a + b * b)}));
         // Java.version(8).lines = VERY LONG;
         System.out.println("Pythagorien triples: (limit 5)");
-        pythagoreanTriples.limit(5).forEach(t -> {
+        //can't print because i'm gonna have to use this stream later on and it would close now if i will
+        /*pythagoreanTriples.limit(5).forEach(t -> {
             System.out.println(t[0] + ", " + t[1] + ", " + t[2]);            
-        });   //magic (:0
+        });   //magic (:0*/
         System.out.println("Boxes with volume smaller than a hundred: (limit 5)");
         Stream<int[]> boxesWithVolumeSmallerThanAhundred = IntStream.rangeClosed(1, 100)
                 .boxed().flatMap(l ->IntStream.rangeClosed(l, 100).boxed()
@@ -171,6 +174,12 @@ public class BookNotes {
         System.out.println("total length of all names:");
         int sumOfLengths = names.stream().collect(summingInt(String::length));
         System.out.println(sumOfLengths);
+        //probobly never going to use this and yet the most convinient function in java 8
+        //summarizing int
+        System.out.println("Summarize statistic of pythagorean triples c value");
+        IntSummaryStatistics cValueStatistics = pythagoreanTriples.collect(summarizingInt(t -> t[2]));
+        System.out.println(cValueStatistics);
+        
     }
     
 }
