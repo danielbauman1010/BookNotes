@@ -48,7 +48,7 @@ public class BookNotes {
         names.forEach((String s) -> {
             if(s.length()>=5)
                 longNames.add(s);
-        });
+        }); //loking backwords now it seems i could've done this with nothing but a single line
         System.out.println("filtered list:");
         System.out.println(longNames.toString());
         
@@ -185,6 +185,7 @@ public class BookNotes {
         System.out.println("all of the names:");
         String allNames = names.stream().collect(joining(", "));
         System.out.println(allNames);
+        
     }
     
 }
