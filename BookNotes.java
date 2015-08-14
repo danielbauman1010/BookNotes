@@ -13,8 +13,10 @@ import java.util.function.BiConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.maxBy;
+import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.summarizingInt;
 import static java.util.stream.Collectors.summingInt;
 import static java.util.stream.Collectors.toList;
@@ -25,7 +27,8 @@ import java.util.stream.Stream;
 public class BookNotes {
         
     //Daniel Bauman's book notes - java 8 in action
-     
+
+    
     public static void main(String[] args) {
         System.out.println("************");
         System.out.println("*Book Notes*");
@@ -185,6 +188,21 @@ public class BookNotes {
         System.out.println("all of the names:");
         String allNames = names.stream().collect(joining(", "));
         System.out.println(allNames);
+        System.out.println("");
+        // using partitioningBy for creating a map with boolean and predicate
+        Map<Boolean, List<String>> partitionedNamesLengthsMap= names.stream()
+                .collect(partitioningBy((String name) -> name.length() >= 5));
+        System.out.println("all short names are:");
+        System.out.println(partitionedNamesLengthsMap.get(false));
+        System.out.println("Prime numbers until 50:");
+//        int candicate = 50;
+        Map<Boolean, List<Integer>> PrimesMap = IntStream.rangeClosed(2, 50).boxed()
+            .collect(partitioningBy(candicate -> {
+                return IntStream.range(2, candicate)
+                    .noneMatch(i -> candicate % i == 0);
+            }));
+        PrimesMap.get(true).forEach(System.out::println);
+        
     }
     
 }
