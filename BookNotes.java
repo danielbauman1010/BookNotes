@@ -51,7 +51,7 @@ public class BookNotes {
         names.forEach((String s) -> {
             if(s.length()>=5)
                 longNames.add(s);
-        }); //loking backwords now it seems i could've done this with nothing but a single line
+        });
         System.out.println("filtered list:");
         System.out.println(longNames.toString());
         
@@ -188,7 +188,6 @@ public class BookNotes {
         System.out.println("all of the names:");
         String allNames = names.stream().collect(joining(", "));
         System.out.println(allNames);
-<<<<<<< HEAD
         System.out.println("");
         // using partitioningBy for creating a map with boolean and predicate
         Map<Boolean, List<String>> partitionedNamesLengthsMap= names.stream()
@@ -203,8 +202,21 @@ public class BookNotes {
                     .noneMatch(i -> candicate % i == 0);
             }));
         PrimesMap.get(true).forEach(System.out::println);
-=======
->>>>>>> e0a1c94f65bd83096e512a155b8250e33d3779fb
+        //using spliterator
+        //counting words in a string
+        int counter = 0;
+        boolean lastSpace = true;
+        System.out.println(allNames); //string with names
+        for (char c : allNames.toCharArray()) {
+        if (Character.isWhitespace(c)) {
+            lastSpace = true;
+        } else {
+                if (lastSpace) counter++;
+                lastSpace = false;
+            }
+        }
+        System.out.println("number of names is: "+counter);
+
         
     }
     
